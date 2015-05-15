@@ -4,13 +4,20 @@
   <title>Demo</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="app.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
   <script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js'></script>
   <script type="text/javascript" src="app.js"></script>
 </head>
 <body class="container">
   <div ng-controller="ImageController as imageList" class="row">
-    <div class="col-xs-1" ng-repeat="image in imageList.images">
-      <img class="img-responsive" ng-src="{{image.avatar_url}}" /></div>
+    <div class="col-xs-1" ng-repeat="owner in imageList.images">
+      <img class="img-responsive" ng-src="{{owner.avatar_url}}" />
+      <ul class="list-group" ng-class="{visible: hover}" ng-mouseenter="hover = true" ng-mouseleave="hover = false" ng-if="aName(owner)">
+        <li class="list-group-item" ng-repeat="follower in owner.followers">
+          {{follower.login}}
+        </li>
+      </ul>
+    </div>
   </div>
 </body>
 </html>
